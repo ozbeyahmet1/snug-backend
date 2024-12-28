@@ -10,7 +10,7 @@ async function bootstrap() {
     credentials: true, 
   });
   const config = new DocumentBuilder()
-  .setTitle('E-commerce API')
+  .setTitle('Snug API')
   .setDescription('API for Products and Reviews')
   .setVersion('1.0')
   .build();
