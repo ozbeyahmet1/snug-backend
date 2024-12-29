@@ -21,6 +21,9 @@ import { ReviewsModule } from './reviews/reviews.module';
         database: configService.get<string>('DATABASE_NAME'),
         autoLoadEntities: true,
         synchronize: false, 
+        ssl: {
+          rejectUnauthorized: false, 
+        },
       }),
     }),
     ProductsModule,
