@@ -17,7 +17,7 @@ export class ProductsController {
   @Get(':href')
   @ApiOperation({ summary: 'Retrieve a single product by href' })
   @ApiParam({ name: 'href', description: 'The href of the product', required: true })
-  findOne(@Param('href') href: string) {
+  findOne(@Param('href') href:string) {
     return this.productsService.findOne(href);
   }
 
@@ -58,18 +58,18 @@ export class ProductsController {
     return this.productsService.create(createProductDto);
   }
 
-  @Put(':id')
+  @Put(':href')
   @ApiOperation({ summary: 'Update an existing product' })
-  @ApiParam({ name: 'id', description: 'The ID of the product to update', required: true })
+  @ApiParam({ name: 'href', description: 'The href of the product to update', required: true })
   @ApiBody({ description: 'Updated product data', type: Object }) // Replace `Object` with a DTO class if available
-  update(@Param('id') id: number, @Body() updateProductDto: any) {
-    return this.productsService.update(+id, updateProductDto);
+  update(@Param('href') href: string, @Body() updateProductDto: any) {
+    return this.productsService.update(href, updateProductDto);
   }
 
-  @Delete(':id')
+  @Delete(':href')
   @ApiOperation({ summary: 'Delete a product' })
-  @ApiParam({ name: 'id', description: 'The ID of the product to delete', required: true })
-  remove(@Param('id') id: number) {
-    return this.productsService.remove(+id);
+  @ApiParam({ name: 'href', description: 'The href of the product to delete', required: true })
+  remove(@Param('href') href: string) {
+    return this.productsService.remove(href);
   }
 }

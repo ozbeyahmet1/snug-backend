@@ -36,7 +36,7 @@ export class Product {
   @ApiProperty({ description: 'Unique href for the product', example: '/products/elegant-wooden-chair' })
   href: string;
 
-  @OneToMany(() => Review, (review) => review.product, { cascade: true })
+  @OneToMany(() => Review, (review) => review.product, { cascade: true, onDelete: 'CASCADE' })
   @ApiProperty({ description: 'List of reviews associated with the product', type: [Review] })
   reviews: Review[];
 }
