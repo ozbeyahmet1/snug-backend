@@ -29,6 +29,7 @@ export class Review {
   timestamp: Date;
 
   @ApiProperty({ type: () => Product, description: 'The product associated with the review' })
-  @ManyToOne(() => Product, (product) => product.reviews)
+  @ManyToOne(() => Product, (product) => product.reviews, { onDelete: 'CASCADE' })
+
   product: Product;
 }

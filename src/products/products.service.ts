@@ -14,7 +14,7 @@ export class ProductsService {
     return this.productRepository.find({ relations: ['reviews'] });
   }
 
-  async findOne(href: string) {
+  async findOne(href:string) {
     return this.productRepository.findOne({
       where: { href },
       relations: ['reviews'],
@@ -27,13 +27,26 @@ export class ProductsService {
     return savedProduct;
   }
 
-  async update(id: number, data: Partial<Product>) {
-    await this.productRepository.update(id, data);
-    return this.productRepository.findOne({ where: { id }, relations: ['reviews'] });
+  async update(href: string, data: Partial<Product>) {
+    await this.productRepository.update(href, data);
+    return this.productRepository.findOne({ where: { href }, relations: ['reviews'] });
   }
 
-  remove(id: number) {
-    return this.productRepository.delete(id);
+  async remove(href: string) {
+    const product = await this.productRepository.findOne({
+      where: { href },
+      relations: ['reviews'],
+    });
+  
+    if (!product) {
+      throw new Error('Product not found');
+    }
+  
+    // Delete related reviews manually
+    await this.productRepository.manager.delete('Review', { product: product.id });
+  
+    // Delete the product
+    return this.productRepository.delete({ href});
   }
 
 
