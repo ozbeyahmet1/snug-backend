@@ -8,7 +8,7 @@ async function bootstrap() {
   // Enable CORS
   app.enableCors({
     origin: [
-      'https://snug-pillow.vercel.app',
+      'snugpillows.vercel.app',
       'http://localhost:3001',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
