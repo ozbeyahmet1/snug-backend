@@ -1,14 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
 
   // Enable CORS
   app.enableCors({
     origin: [
-      'snugpillows.vercel.app',
+      configService.get<string>('FRONTEND_URL'),
       'http://localhost:3001',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
